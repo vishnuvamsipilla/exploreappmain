@@ -1,0 +1,31 @@
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.home-section {
+  min-height: 70%;
+  flex-grow: 1;
+  /* height: 100%; */
+  /* min-height: 70%;
+  flex-grow: 1; */
+  width: 100%;
+  background-image: url("https://img.freepik.com/free-photo/woman-black-trousers-purple-blouse-laughs-leaning-stand-with-elegant-clothes-pink-background_197531-17614.jpg?w=2000");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.shop-btn {
+  color: blueviolet;
+  padding: 10px;
+  width: 150px;
+  margin-bottom: 80px;
+  margin-left: 80px;
+  font-size: 25px;
+  border: none;
+  border-radius: 15px;
+}
