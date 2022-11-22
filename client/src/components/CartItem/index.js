@@ -26,7 +26,7 @@ const CartItem = ({ cartItemDetails }) => {
     };
     const response = await fetch(url, options);
     if (response.ok) {
-      updateCartProductQty(id, quantity + 1);
+      updateCartProductQty({ id, quantity: quantity + 1 });
     } else {
       alert("server error");
     }
@@ -46,7 +46,7 @@ const CartItem = ({ cartItemDetails }) => {
 
       const response = await fetch(url, options);
       if (response.ok) {
-        updateCartProductQty(id, quantity - 1);
+        updateCartProductQty({ id, quantity: quantity - 1 });
       } else {
         alert("server error");
       }

@@ -32,7 +32,9 @@ export function Cart() {
   const onClickOrder = async () => {
     const productsIds = cartList.map((eachItem) => eachItem.id);
     const date = new Date();
-    const formatedDate = `${date.getDate()}/${date.getDay()}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    const formatedDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     // console.log(formatedDate);
     // console.log(productsIds);
     const obj = { date: formatedDate, productsIds };

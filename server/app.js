@@ -222,10 +222,7 @@ app.post(
   getPlayloadDetails,
   async (request, response) => {
     const { email } = request.payLoad;
-    // console.log("hi");
-    //console.log(request.body);
     const { id, quantity } = request.body;
-    // console.log(email);
     const sqlQuary = `update userscarts set quantity=${quantity} where email="${email}" and product_id="${id}";`;
     const dbResponse = await db.run(sqlQuary);
     response.status(200);
@@ -244,10 +241,12 @@ app.get("/cartdetails", getPlayloadDetails, async (request, response) => {
 });
 
 app.post("/addcartitem", getPlayloadDetails, async (request, response) => {
+  console.log("pilla");
   const { email } = request.payLoad;
-  const { productId, quantity } = request.body;
+  const { id, quantity } = request.body;
+  console.log(id);
   const sqlQuary = `insert into userscarts(email,product_id,quantity)
-  values("${email}","${productId}",${quantity});`;
+  values("${email}","${id}",${quantity});`;
   const dbResponse = await db.run(sqlQuary);
   response.status(200);
   response.send({ data: "product added successfully" });

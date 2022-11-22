@@ -50,11 +50,15 @@ const App = () => {
     updateCartList(cartList.filter((eachItem) => eachItem.id !== id));
   };
 
-  const updateCartProductQty = (id, qty) => {
+  const updateCartProductQty = (obj) => {
+    const { id, quantity } = obj;
+    console.log(id);
+    console.log(quantity);
+
     updateCartList(
       cartList.map((eachItem) => {
         if (eachItem.id === id) {
-          return { ...eachItem, quantity: qty };
+          return { ...eachItem, quantity: quantity };
         }
         return eachItem;
       })

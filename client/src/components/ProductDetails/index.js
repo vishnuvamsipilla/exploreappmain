@@ -26,6 +26,7 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const contextObj = useContext(CartContext);
   const { addCartItem, cartList, updateCartProductQty } = contextObj;
+  console.log(cartList);
   const jwtToken = Cookies.get("jwt_token");
   const history = useNavigate();
   useEffect(() => {
@@ -50,8 +51,18 @@ const ProductDetails = () => {
   const { brand, id, image_url, price, title } = productData;
 
   const onIncrementQuantity1 = async () => {
+    //   const itemDetails = cartList.find((eachItem) => (eachItem.id = id));
+    //  const oldQuantity = itemDetails.quantity;
+    //   const obj = { id, quantity: quantity + oldQuantity };
+    // updateCartProductQty(obj);
     const url = "/update-product-quantity";
-    const obj = { id, quantity: quantity + 1 };
+    const itemDetails = cartList.find((eachItem) => eachItem.id === id);
+
+    const oldQuantity = itemDetails.quantity;
+    console.log(oldQuantity);
+
+    const obj = { id, quantity: quantity + oldQuantity };
+
     const options = {
       method: "POST",
       headers: {
@@ -62,8 +73,9 @@ const ProductDetails = () => {
     };
     const response = await fetch(url, options);
     if (response.ok) {
-      updateCartProductQty(id, quantity + 1);
       alert("Item added to the cart");
+      console.log();
+      updateCartProductQty(obj);
     } else {
       alert("server error");
     }
@@ -129,11 +141,16 @@ const ProductDetails = () => {
     }
   };
 
-  const cartObject = { productId: id, quantity };
+  // const cartObject = { productId: id, quantity };
 
   const onClickAddToCart = async () => {
     const isProductIncart = cartList.find((eachItem) => eachItem.id === id);
+    // console.log(cartList);
+    // console.log(isProductIncart);
+
+    const newObj = { id, quantity };
     if (isProductIncart === undefined) {
+      console.log("pilla");
       const url = "/addcartitem";
       const options = {
         method: "POST",
@@ -141,7 +158,7 @@ const ProductDetails = () => {
           Authorization: `Bearer ${jwtToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cartObject),
+        body: JSON.stringify(newObj),
       };
       const response = await fetch(url, options);
       if (response.status === 200) {
